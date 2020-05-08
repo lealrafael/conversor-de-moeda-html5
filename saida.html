@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Conversor de Moeda - Saída
+		</title>
+		
+		<script>
+			function voltar(){ //declarando função voltar( )
+				//voltar para tela de entrada
+				location.href = "entrada.html";
+				
+			}
+			
+			function carregaResposta(){
+				
+				var oUrl = new URL(location.href); //criando um objeto da classe
+				var sValorOrigem = oUrl.searchParams.get("valor_origem"); //pega o valor da url do input valor_origem
+				console.log(sValorOrigem); //parametro que identifica o valor da url e mostra
+				
+			}
+			
+			function callback(){
+				
+				console.log("Caiu aqui");
+				var oResponse = this;
+				var sResponseBody = oResponse.responseText;
+				var oJSON = JSON.parse(sResponseBody);
+				var sReais = oJSON.rates.BRL;
+				
+				console.log(sReais);
+			}
+			
+			function chamaAPI(){
+				
+				const sURL = "https://api.exchangeratesapi.io/latest?base=USD"; //declarando uma constante
+				var oRequest = new XMLHttpRequest(); //principal classe nativa que permite fazer requisição de rede
+				oRequest.addEventListener("load", callback);
+				oRequest.open("GET", sURL); 
+				oRequest.send();
+				console.log("ja passou pelo send (chamou)");
+			}
+			
+			window.onload = function(){ //colocando uma função em uma variavel
+				
+				chamaAPI();
+			}
+			
+		</script>
+	</head>
+	<body>
+		
+		
+			<label>Moeda de Destino</label>
+			<input type="text" value="BRL" disabled>
+			<br />
+			<br />
+			<label>Valor de Destino</label>
+			<input type="number" disabled>
+			
+			<br />
+			<br />
+			<button type="button" onclick="voltar()">
+				Voltar
+			</button>
+		
+	</body>
+</html>
