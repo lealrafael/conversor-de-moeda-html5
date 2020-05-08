@@ -27,13 +27,14 @@
 				var sResponseBody = oResponse.responseText;
 				var oJSON = JSON.parse(sResponseBody);
 				var sReais = oJSON.rates.BRL;
-				
 				console.log(sReais);
+				
+				document.querySelector("#valor_destino").value = sReais;
 			}
 			
 			function chamaAPI(){
 				
-				const sURL = "https://api.exchangeratesapi.io/latest?base=USD"; //declarando uma constante
+				const sURL = "https://api.exchangeratesapi.io/latest?base=USD"; //declarando uma constante e carregando o link da api
 				var oRequest = new XMLHttpRequest(); //principal classe nativa que permite fazer requisição de rede
 				oRequest.addEventListener("load", callback);
 				oRequest.open("GET", sURL); 
@@ -41,7 +42,7 @@
 				console.log("ja passou pelo send (chamou)");
 			}
 			
-			window.onload = function(){ //colocando uma função em uma variavel
+			window.onload = function(){ //colocando uma função em uma variavel enquanto a tela esta carregando
 				
 				chamaAPI();
 			}
@@ -56,7 +57,7 @@
 			<br />
 			<br />
 			<label>Valor de Destino</label>
-			<input type="number" disabled>
+			<input id="valor_destino" type="number" disabled>
 			
 			<br />
 			<br />
