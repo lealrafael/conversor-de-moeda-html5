@@ -12,14 +12,7 @@
 				
 			}
 			
-			function carregaResposta(){
-				
-				var oUrl = new URL(location.href); //criando um objeto da classe
-				var sValorOrigem = oUrl.searchParams.get("valor_origem"); //pega o valor da url do input valor_origem
-				console.log(sValorOrigem); //parametro que identifica o valor da url e mostra
-				
-			}
-			
+
 			function callback(){
 				
 				console.log("Caiu aqui");
@@ -29,7 +22,14 @@
 				var sReais = oJSON.rates.BRL;
 				console.log(sReais);
 				
-				document.querySelector("#valor_destino").value = sReais;
+				//AQUI
+				var oUrl = new URL(location.href); //criando um objeto da classe
+				var sValorOrigem = oUrl.searchParams.get("valor_origem"); //pega o valor da url do input valor_origem
+				console.log(sValorOrigem); //parametro que identifica o valor da url e mostra
+				
+				document.querySelector("#valor_destino").value = sReais * sValorOrigem;
+				
+				
 			}
 			
 			function chamaAPI(){
